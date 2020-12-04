@@ -31,12 +31,6 @@ apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
 - role: control-plane
   image: kindest/node:v1.19.4
-- role: worker
-  image: kindest/node:v1.19.4
-- role: worker
-  image: kindest/node:v1.19.4
-- role: worker
-  image: kindest/node:v1.19.4
   extraPortMappings:
   - containerPort: 31080 # expose port 31380 of the node to port 80 on the host, later to be use by kourier ingress
     hostPort: 80
