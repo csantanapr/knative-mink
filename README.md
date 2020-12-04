@@ -111,3 +111,81 @@ TLDR; `curl -sL https://raw.githubusercontent.com/csantanapr/knative-mink/main/0
     ```bash
     kubectl get pods,svc -n mink-system
     ```
+
+## Deploy a Prebuilt Container with Knative Serving Application
+
+Deploy using [kn](https://github.com/knative/client)
+```bash
+kn service create hello \
+--image gcr.io/knative-samples/helloworld-go \
+--port 8080 \
+--env TARGET=Knative
+```
+
+**Optional:** Deploy a Knative Service using the equivalent yaml manifest:
+```bash
+cat <<EOF | kubectl apply -f -
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: hello
+spec:
+  template:
+    spec:
+      containers:
+        - image: gcr.io/knative-samples/helloworld-go
+          ports:
+            - containerPort: 8080
+          env:
+            - name: TARGET
+              value: "Knative"
+EOF
+```
+
+Wait for Knative Service to be Ready
+```bash
+kubectl wait ksvc hello --all --timeout=-1s --for=condition=Ready
+```
+
+Get the URL of the new Service
+```bash
+SERVICE_URL=$(kubectl get ksvc hello -o jsonpath='{.status.url}')
+echo $SERVICE_URL
+```
+
+Test the App
+```bash
+curl $SERVICE_URL
+```
+
+The output should be:
+```
+Hello Knative!
+```
+
+## Build and Deploy via Knative CLI kn
+
+TODO
+```
+REPO_NANESPACE=csantanapr
+```
+```
+cd helloworld-go/
+kn service create helloworkd-go --image=$(mink build --image ${REPO_NANESPACE}/helloworld-go)
+curl $(kn service describe helloworkd-go -o url)
+```
+
+Now try with nodejs
+```
+cd helloworld-nodejs/
+kn service create helloworkd-nodejs --image=$(mink build --image ${REPO_NANESPACE}/helloworld-nodejs)
+curl $(kn service describe helloworkd-go -o url)
+```
+
+## Build and Deploy via YAML
+
+TODO
+```
+cd helloworld-go/
+mink apply
+```
