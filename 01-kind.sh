@@ -3,6 +3,7 @@
 set -eo pipefail
 
 kindVersion=$(kind version);
+kindClusterName=mink
 
 if [[ $kindVersion =~ "v0.9." ]]
 then
@@ -13,9 +14,9 @@ else
 fi
 
 REPLY=continue
-KIND_EXIST="$(kind get clusters -q | grep knative || true)"
+KIND_EXIST="$(kind get clusters -q | grep ${kindClusterName} || true)"
 if [[ ${KIND_EXIST} ]] ; then
- read -p "Knative Cluster kind-knative already installed, delete and re-create? N/y: " REPLY </dev/tty
+ read -p "Knative Cluster kind-${kindClusterName} already installed, delete and re-create? N/y: " REPLY </dev/tty
 fi
 if [ "$REPLY" == "Y" ] || [ "$REPLY" == "y" ]; then
   kind delete cluster --name knative
@@ -25,7 +26,7 @@ elif [ "$REPLY" == "N" ] || [ "$REPLY" == "n" ] || [ -z "$REPLY" ]; then
 fi
 
 KIND_CLUSTER=$(mktemp)
-cat <<EOF | kind create cluster --name knative --config=-
+cat <<EOF | kind create cluster --name ${kindClusterName} --config=-
 kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 nodes:
