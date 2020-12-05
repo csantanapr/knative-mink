@@ -1,8 +1,0 @@
-# Where to upload source (if unspecified)
-bundle: docker.io/csantanapr/mink-bundles
-
-# Where to upload built images (if unspecified)
-image: docker.io/csantanapr/mink-images
-
-# Who to run the build as (if unspecified)
-as: me
