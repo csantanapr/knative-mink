@@ -19,7 +19,7 @@ if [[ ${KIND_EXIST} ]] ; then
  read -p "Knative Cluster kind-${kindClusterName} already installed, delete and re-create? N/y: " REPLY </dev/tty
 fi
 if [ "$REPLY" == "Y" ] || [ "$REPLY" == "y" ]; then
-  kind delete cluster --name knative
+  kind delete cluster --name "${kindClusterName}"
 elif [ "$REPLY" == "N" ] || [ "$REPLY" == "n" ] || [ -z "$REPLY" ]; then
   echo "Installation skipped"
   exit 0

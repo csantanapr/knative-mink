@@ -8,7 +8,7 @@ KNATIVE_DOMAIN=$INGRESS_HOST.nip.io
 mink install
 
 
-kubectl patch configmap -n knative-serving config-domain -p "{\"data\": {\"$KNATIVE_DOMAIN\": \"\"}}"
+kubectl patch configmap -n mink-system config-domain -p "{\"data\": {\"$KNATIVE_DOMAIN\": \"\"}}"
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
