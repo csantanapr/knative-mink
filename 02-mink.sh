@@ -6,7 +6,9 @@ INGRESS_HOST="127.0.0.1"
 KNATIVE_DOMAIN=$INGRESS_HOST.nip.io
 
 mink install
-
+kubectl -n mink-system patch cm config-leader-election --type merge -p '{"data":{"buckets":"1"}}'
+kubectl -n mink-system scale statefulset/controlplane --replicas 1
+kubectl -n mink-system rollout restart statefulset/controlplane
 
 kubectl patch configmap -n mink-system config-domain -p "{\"data\": {\"$KNATIVE_DOMAIN\": \"\"}}"
 
