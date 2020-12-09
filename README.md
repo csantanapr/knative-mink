@@ -9,13 +9,10 @@ TLDR;
 curl -sL mink.csantanapr.dev | bash
 ```
 
->Updated and verified on 2020/12/04 with:
+>Updated and verified on 2020/12/09 with:
 >- Mink 0.19.0
->- Knative Serving 0.19.0
->- Knative Kourier 0.19.1
->- Knative Eventing 0.19.2
 >- Kind version 0.9.0
->- Kubernetes version 1.19.4
+>- Kubernetes version 1.20.0
 
 
 ## Install Docker for Desktop
@@ -31,7 +28,7 @@ docker version
 
 Run the following command re-using the repository [knative-kind](https://github.com/csantanapr/knative-kind)
 ```bash
-curl -sL https://raw.githubusercontent.com/csantanapr/knative-kind/main/01-kind.sh | bash
+curl -sL https://raw.githubusercontent.com/csantanapr/knative-kind/master/01-kind.sh | bash
 ```
 
 ## Install Mink CLI
@@ -53,7 +50,10 @@ rm "${TARBASE}.tar.gz"
 
 ## Install Knative with mink
 
-TLDR; `curl -sL https://raw.githubusercontent.com/csantanapr/knative-mink/main/02-mink.sh | sh`
+TLDR;
+```bash
+curl -sL https://raw.githubusercontent.com/csantanapr/knative-mink/main/02-mink.sh | bash
+```
 
 1. Run the install command
     ```bash
