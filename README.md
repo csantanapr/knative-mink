@@ -31,7 +31,7 @@ docker version
 
 Run the following command re-using the repository [knative-kind](https://github.com/csantanapr/knative-kind)
 ```bash
-curl -sL https://raw.githubusercontent.com/csantanapr/knative-mink/main/01-kind.sh | sh
+curl -sL https://raw.githubusercontent.com/csantanapr/knative-kind/main/01-kind.sh | bash
 ```
 
 ## Install Mink CLI
@@ -53,7 +53,7 @@ rm "${TARBASE}.tar.gz"
 
 ## Install Knative with mink
 
-TLDR; `curl -sL https://raw.githubusercontent.com/csantanapr/knative-mink/main/02-serving.sh | sh`
+TLDR; `curl -sL https://raw.githubusercontent.com/csantanapr/knative-mink/main/02-mink.sh | sh`
 
 1. Run the install command
     ```bash
